@@ -1,0 +1,95 @@
+{
+  "name": "meaw-ghop",
+"displayName": "Meaw Ghop",
+  "description": "Plays a sound when a terminal command fails with a non-zero exit code",
+  "version": "1.0.0",
+  "publisher": "fizeeeti0n",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["terminal", "sound", "error", "notification", "audio"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "terminalErrorSound.testSound",
+        "title": "Terminal Error Sound: Test Sound"
+      },
+      {
+        "command": "terminalErrorSound.enable",
+        "title": "Terminal Error Sound: Enable"
+      },
+      {
+        "command": "terminalErrorSound.disable",
+        "title": "Terminal Error Sound: Disable"
+      },
+      {
+        "command": "terminalErrorSound.setSoundFile",
+        "title": "Terminal Error Sound: Set Sound File"
+      }
+    ],
+    "configuration": {
+      "title": "Terminal Error Sound",
+      "properties": {
+        "terminalErrorSound.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the terminal error sound notification"
+        },
+        "terminalErrorSound.soundFile": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to a custom .wav or .mp3 sound file. Leave empty to use the bundled default sound."
+        },
+        "terminalErrorSound.volume": {
+          "type": "number",
+          "default": 0.8,
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Playback volume for the error sound (0.0 to 1.0)"
+        },
+        "terminalErrorSound.cooldownMs": {
+          "type": "number",
+          "default": 2000,
+          "minimum": 0,
+          "description": "Minimum milliseconds between sound triggers to prevent repeated sounds"
+        },
+        "terminalErrorSound.useExitCodeDetection": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect errors using terminal exit codes (requires shell integration)"
+        },
+        "terminalErrorSound.usePatternDetection": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect errors using common error text patterns in terminal output"
+        },
+        "terminalErrorSound.customPatterns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "description": "Additional regex patterns to detect errors in terminal output"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0"
+  },
+  "dependencies": {
+    "play-sound": "^1.1.6"
+  }
+}
