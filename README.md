@@ -121,7 +121,7 @@ vsce package
 
 # This produces terminal-error-sound-1.0.0.vsix
 # Install locally:
-code --install-extension terminal-error-sound-1.0.0.vsix
+code --install-extension terminal-error-sound-1.0.1.vsix
 ```
 
 > **Note:** You must set a valid `publisher` in `package.json` before publishing
